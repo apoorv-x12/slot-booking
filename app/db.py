@@ -15,8 +15,22 @@ engine = create_async_engine(
 )
 
 async def execute(query: str,params: dict={}):
+
     async with engine.begin() as conn:
+        '''
+        res = await conn.execute(text("""
+            SELECT
+                current_database(),
+                current_user,
+                current_schema(),
+                inet_server_addr(),
+                inet_server_port()
+        """))
+        print("FASTAPI DB CONTEXT:", res.fetchone())
+        breakpoint()
+        '''
         result = await conn.execute(text(query),params)
+        
         print("ROWCOUNT:", result.rowcount)
 
         return result 

@@ -12,5 +12,5 @@ async def book_slot(db_exec, slot_id: int):
     
     if result.rowcount == 1:
         return {"status": "BOOKED"}
-    else:
-        return {"error": "Already booked"}
+    
+    return {"error": "Already booked"}
